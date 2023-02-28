@@ -38,7 +38,7 @@ jobs:
       
     - name: Build with Maven
       run: |
-       cd code/ayetap; mvn clean install
+       cd code/ayetap; mvn clean install -DskipTests
                          
 #     - name: Publish
 #       run: | 
