@@ -1,0 +1,45 @@
+name: Maven CI
+
+on:
+  workflow_dispatch:
+          
+jobs:
+  maven-ci:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    name: Maven CI
+    continue-on-error: false
+    steps:
+    
+    - name: Checkout config repo
+      uses: actions/checkout@v3
+      with:
+        repository: Ayetap/ayetap-multimodule
+        ref: tempVijay
+        token: ${{ secrets.GH_PAT }}
+        path: code
+        
+    - uses: actions/setup-java@v3
+      with:
+        distribution: 'zulu'
+        java-version: '8'
+        cache: 'maven'
+    
+    - name: Set up maven
+      uses: stCarolas/setup-maven@v4.4
+      with:
+          maven-version: 3.6.3
+                
+#     - name: Copy settings.xml
+#       run: |
+#        cp devops-config/.m2/settings.xml ~/.m2/settings.xml
+      
+    - name: Build with Maven
+      run: |
+       cd code/ayetap; mvn clean install
+                         
+#     - name: Publish
+#       run: | 
+#         mvn deploy
