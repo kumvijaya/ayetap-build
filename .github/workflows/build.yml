@@ -30,7 +30,7 @@ jobs:
     - name: Set up maven
       uses: stCarolas/setup-maven@v4.4
       with:
-          maven-version: 3.6.3
+          maven-version: 3.3.9
                 
 #     - name: Copy settings.xml
 #       run: |
